@@ -1,4 +1,3 @@
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiZ3V1aDIiLCJhIjoiY20xdnF0ZzYwMGRidzJrcTE4YTlxcjRuOSJ9.BQM_h_jGoH5S8XyN1EDwRw' 
         const map = new mapboxgl.Map({
             container: 'map',
@@ -7,10 +6,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ3V1aDIiLCJhIjoiY20xdnF0ZzYwMGRidzJrcTE4YTlxc
             zoom: 10
         })
         map.on('load', () => {
-            map.setPaintProperty('water', 'fill-color', '#1491F7') // Cor azul para água
-            map.setPaintProperty('land', 'background-color', '') 
-            map.setPaintProperty('road', 'background-color', '#3e8e41') // 
-        })
+            const tema = localStorage.getItem('tema') || 'claro';  // Pega o tema, padrão claro
+            aplicarTemaMapa(tema);
+            });
+
         
         // Dados das ETECs
 const etecs = [
