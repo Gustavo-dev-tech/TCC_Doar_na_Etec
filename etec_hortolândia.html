@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETEC Hortolândia</title>
+    <link rel="stylesheet" href="Pag_de_info_das_ETECS.css">
+</head>
+<body>
+    <header>
+        <h1>ETEC Hortolândia</h1>
+    </header>
+
+    <main>
+        <section class="info">
+            <h2>Informações</h2>
+            <p><strong>Horário de Funcionamento:</strong> Seg-Sex: 8h às 22h</p>
+            <p><strong>Distância:</strong> <span id="distancia">Calculando...</span></p>
+        </section>
+
+        <section class="contato">
+            <h4>Contato</h4>
+            <a href="https://wa.me/5519998765432" target="_blank" class="whatsapp-link">
+                <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
+                Tirar dúvidas no WhatsApp
+            </a>
+            <a href="agendar.html" target="_blank" class="doacao"> 
+            <img src="caixa_logo (1).png" class="doacao IMG" alt="Agendar Doação"> 
+            Agendar Doação
+            
+        </section>
+    </main>
+
+    
+        <p>© 2024 ETEC Hortolândia</p>
+    
+
+    <script>
+        // Calcula a distância do usuário para a ETEC
+        const etecLatitude = -22.872140239665345;
+        const etecLongitude = -47.2101139378577;
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+                const distancia = calcularDistancia(userLat, userLng, etecLatitude, etecLongitude);
+                document.getElementById("distancia").textContent = `${distancia.toFixed(2)} km`;
+            }, () => {
+                document.getElementById("distancia").textContent = "Não foi possível obter a localização.";
+            });
+        } else {
+            document.getElementById("distancia").textContent = "Geolocalização não suportada.";
+        }
+
+        // Função para calcular a distância entre dois pontos
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Raio da Terra em km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = 
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        // Converte graus para radianos
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180);
+        }
+
+        // Adiciona um link para o Google Maps com a rota do usuário até a ETEC
+function adicionarLinkGoogleMaps(userLat, userLng, etecLat, etecLng) {
+    const linkGoogleMaps = document.createElement('a');
+    linkGoogleMaps.href = `https://www.google.com/maps/dir/${userLat},${userLng}/${etecLat},${etecLng}`;
+    linkGoogleMaps.target = '_blank';
+    linkGoogleMaps.classList.add('google-maps-link');
+    linkGoogleMaps.textContent = '🔗 Traçar rota no Google Maps';
+
+    const contatoSection = document.querySelector('.contato');
+    contatoSection.appendChild(linkGoogleMaps);
+}
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+        const userLat = position.coords.latitude;
+        const userLng = position.coords.longitude;
+        const distancia = calcularDistancia(userLat, userLng, etecLatitude, etecLongitude);
+        document.getElementById("distancia").textContent = `${distancia.toFixed(2)} km`;
+
+        // Adiciona o link para traçar a rota no Google Maps
+        adicionarLinkGoogleMaps(userLat, userLng, etecLatitude, etecLongitude);
+    }, () => {
+        document.getElementById("distancia").textContent = "Não foi possível obter a localização.";
+    });
+}
+
+
+    </script>
+</body>
+</html>
