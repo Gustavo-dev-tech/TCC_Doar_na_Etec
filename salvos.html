@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favoritos</title>
+  <link rel="stylesheet" href="salvos.css">
+  
+</head>
+<body>
+  <div class="header">
+    <a href="etecs.html" class="back-button" title="Voltar para a lista de ETECs">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </a>
+    <h1>Favoritos</h1>
+  </div>
+
+  <div class="content">
+    <div class="buttons">
+      <a href="Lista_etecs.html"><button class="button"   onclick="addNewFavorite()"><strong> ➕ Adicionar Favorito</strong></button></a>
+    </div>
+
+    <div class="list-container">
+      <p class="list-title">Favoritos</p>
+      <div class="list" id="favoriteList"></div>
+    </div>
+  </div>
+
+  <script>
+    function gerarNomeArquivo(etecName) {
+  return  etecName
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove acentos
+      .replace(/\s+/g, '_') // troca espaços por underline
+      .replace(/[^\w_]/g, '') // remove caracteres que não são letras, números ou underline
+    + '.html';
+}
+    
+    
+    
+    
+    // Inicializar lista de favoritos
+    const favoriteList = document.getElementById("favoriteList");
+
+
+
+
+    // Função para carregar favoritos do Local Storage
+    function loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      favoriteList.innerHTML = "";
+      favorites.forEach((etec, index) => {
+        const listItem = document.createElement("div");
+        listItem.className = "list-item";
+      
+
+        // Cria o link com o nome da ETEC
+        const nomeArquivo = gerarNomeArquivo(etec);
+        const nameLink = document.createElement('a');
+        nameLink.href = nomeArquivo; // coloque a URL desejada aqui
+        nameLink.textContent = etec; // nome da ETEC
+        nameLink.style.textDecoration = 'none'; // opcional, tira sublinhado
+        nameLink.style.color = 'inherit'; // opcional, herda cor do texto
+        
+
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'icon';
+        iconSpan.textContent = '🗑️';
+
+        // Adiciona listener para remoção e alerta
+        iconSpan.addEventListener('click', () => {
+          removeFavorite(index);  // sua função para remover da lista
+          alert(`${etec} Removido dos favoritos!`);
+        });
+
+        
+        listItem.appendChild(nameLink);  // adiciona o link aqui
+        listItem.appendChild(iconSpan);
+        favoriteList.appendChild(listItem);
+      });
+    }
+
+    // Função para remover um favorito
+    function removeFavorite(index) {
+      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      favorites.splice(index, 1); // Remove o item da lista
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      loadFavorites();
+    }
+
+    // Carregar favoritos ao abrir a página
+    loadFavorites();
+  </script>
+</body>
+</html>

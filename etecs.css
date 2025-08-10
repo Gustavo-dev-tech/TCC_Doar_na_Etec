@@ -1,0 +1,164 @@
+.autocomplete-items {
+  display: none;
+  position: absolute;
+  top: 40px;
+    border: 1px solid #d4d4d4;
+    max-height: 1005px;
+    overflow-y: auto;
+    
+    background: white;
+    width: 100%; /* ajuste conforme o input */
+    height: 150px;
+    z-index: 99;
+  }
+  .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .autocomplete-items div:hover {
+    background-color: #e9e9e9;
+  }
+
+
+
+/* Navegação fixa na parte inferior */
+.navigation {
+position: fixed; /* Fixa a navegação */
+bottom: 0; /* Posiciona a barra na parte inferior */
+width: 100%; /* Largura total */
+background-color: white;
+display: flex;
+
+z-index: 9999; /* Para garantir que fique sobre o mapa */
+}
+
+/* Ajuste do item da lista  */
+ul {
+display: inline-flex;
+width: 80%; /* DISTACIA DOS ICONESSSSS */ 
+max-width: 110%; /* Tamanho máximo para a lista */
+
+}
+
+li {
+list-style-type: none;
+width: 100%;
+height: 35px; /*DEFINE O TAMANHO DA BARRA BRANCA INFERIOR */
+position: relative;
+
+}
+
+li a {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+text-align: center;
+font-size: 0px;
+
+}
+a {
+    text-decoration: none; /* TIRAR SUBLINHADO DOS LINKS*/
+  }
+a .ICONE {
+    width: 26px; /* ou defina uma largura específica, caso necessário */
+    height: 20px; /* ou 18px, se desejar um pouco maior */
+    display: flex;
+    justify-content: center;
+    color: black;
+    margin-bottom: -5px; /* Espaço entre a imagem e o texto */
+
+}
+
+a .text { /*Meche com o texto de cada icone */
+
+justify-content: center;
+font-size: 12px;
+font-family: Arial, Helvetica, sans-serif;
+background-color: transparent;
+color: black;
+}
+
+/* Seletores  ACIMA*/
+
+/* BARA DE PESQUISA ABAIXO */
+
+ body { margin: 0; padding: 0; }
+ #map { height: 100vh; }
+ 
+ .search-bar {
+     position: absolute;
+     top: 30px;
+     left: 50%;
+     transform: translateX(-50%);
+     z-index: 1000; /* Para garantir que o input fique sobre o mapa */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: #4CAF50; /* Cor de fundo verde */
+     border-radius: 13px; /* Arredonda o Search*/
+     padding: 1px;
+     box-shadow: 10px; /* Remove sombra */
+     border: none; /* Remove borda */
+     outline: none; /* Remove outline */
+}
+
+.search-bar input {
+ border: 10px;
+ outline: none;
+ background: none;
+ flex-grow: 1;
+ font-size: 16px; /* Tamanho da fonte */
+ color: white; /* Cor do texto do input */
+ padding: 1px; /* Adiciona padding para aumentar o tamanho do input */
+ height: 40px; /* Ajusta a altura do input */
+ min-width: 310px; /* Define uma largura mínima para o input */
+}
+
+/* Cor da placeholder */
+.search-bar input::placeholder {
+ color: white; /* Muda a cor da placeholder para branco */
+}
+
+.search-bar button {
+ background: none;
+ border: 1px;
+ 
+}
+
+.search-bar button img {
+ width: 20px;
+ height: 20px;
+}
+.search-bar:active {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra projetada */
+  border: black 2px;
+}
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}

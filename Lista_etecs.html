@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de ETECs</title>
+    <link rel="stylesheet" href="Lista_etecs.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lista de ETECs</h1>
+     <!-- Botão de voltar -->
+     <a href="etecs.html" class="back-button" title="Voltar para a lista de ETECs">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+    </a>
+
+    <ul class="etec-list">
+        <li class="etec-item">
+            <div class="etec-name">ETEC Polivalente de Americana</div>
+            <div class="etec-info">Horário: Seg-Sex: 8h às 22h</div>
+            <div class="etec-info">Telefone: +55 19 998765432</div>
+            <a class="etec-link" href="etec_polivalente_de_americana.html">Ver Detalhes</a>
+            <a class="etec-link" href="salvos.html" onclick="add_fav()">Adicionar a favoritos </a>
+        </li>
+        <li class="etec-item">
+            <div class="etec-name">ETEC João Belarmino</div>
+            <div class="etec-info">Horário: Seg-Sex: 8h às 22h</div>
+            <div class="etec-info">Telefone: +55 19 998765432</div>
+            <a class="etec-link" href="etec_joão_belarmino.html">Ver Detalhes</a>
+            <a class="etec-link" href="salvos.html" onclick="add_fav()">Adicionar a favoritos </a>
+        </li>
+        <li class="etec-item">
+            <div class="etec-name">ETEC Bento Quirino</div>
+            <div class="etec-info">Horário: Seg-Sex: 8h às 22h</div>
+            <div class="etec-info">Telefone: +55 19 998765432</div>
+            <a class="etec-link" href="etec_bento_quirino.html">Ver Detalhes</a>
+            <a class="etec-link" href="salvos.html" onclick="add_fav()">Adicionar a favoritos </a>
+        </li>
+        <li class="etec-item">
+            <div class="etec-name">ETEC Hortolândia</div>
+            <div class="etec-info">Horário: Seg-Sex: 8h às 22h</div>
+            <div class="etec-info">Telefone: +55 19 998765432</div>
+            <a class="etec-link" href="etec_hortolândia.html">Ver Detalhes</a>
+            <a class="etec-link" href="salvos.html" onclick="add_fav()">Adicionar a favoritos </a>
+        </li>
+        <li class="etec-item">
+            <div class="etec-name">ETEC Paulínia</div>
+            <div class="etec-info">Horário: Seg-Sex: 8h às 22h</div>
+            <div class="etec-info">Telefone: +55 19 998765432</div>
+            <a class="etec-link" href="etec_paulinia.html">Ver Detalhes</a>
+            <a class="etec-link" href="salvos.html" onclick="add_fav()">Adicionar a favoritos </a>
+            
+        </li>
+        <li class="etec-item">
+            <div class="etec-name">ETEC Sumaré</div>
+            <div class="etec-info">Horário: Seg-Sex: 8h às 22h</div>
+            <div class="etec-info">Telefone: +55 19 998765432</div>
+            <a class="etec-link" href="etec_sumare.html">Ver Detalhes</a>
+            <a class="etec-link" href="salvos.html" onclick="add_fav()">Adicionar a favoritos </a>
+        </li>
+    </ul>
+</div>
+
+<script>
+function add_fav() {
+    const etecName = event.target.parentElement.querySelector('.etec-name').textContent;
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    
+    if (!favorites.includes(etecName)) {
+        favorites.push(etecName);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert(`${etecName} adicionado aos favoritos!`);
+    } else {
+        alert(`${etecName} já está nos favoritos.`);
+    }
+}
+</script>
+
+</body>
+</html>
